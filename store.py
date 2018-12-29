@@ -7,7 +7,7 @@ TEMPLATE_PATH.insert(0, '')
 connection = pymysql.connect(
     host="localhost",
     user="root",
-    passwd="Laura1308",
+    passwd="root",
     db="assignment",
     charset="utf8",
     cursorclass=pymysql.cursors.DictCursor)
@@ -86,7 +86,7 @@ def delete_category(id):
                 return json.dumps({'STATUS': 'ERROR', 'MSG': "category not found", 'CODE': 404})
 
     except:
-        return json.dumps({'STATUS': 'ERROR', 'MSG': "Internal error", "CODE":500})
+        return json.dumps({'STATUS': 'ERROR', 'MSG': "Internal error", "CODE": 500})
 
 
 @get("/categories")
@@ -149,7 +149,7 @@ def add_product():
                                   "WHERE id={5}".format(title, description, price, img_url, favorite, id)
                             cursor.execute(sql)
                             connection.commit()
-                        return json.dumps({'STATUS': 'SUCCESS', 'PRODUCT_ID':id,'CODE': 201})
+                        return json.dumps({'STATUS': 'SUCCESS', 'PRODUCT_ID': id, 'CODE': 201})
                     else:
                         with connection.cursor() as cursor:
                             sql2 = "INSERT INTO product (description, price,title, img_url, favorite, id) VALUES ('{0}',{1},'{2}'," \
